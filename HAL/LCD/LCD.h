@@ -9,9 +9,9 @@
 #ifndef LCD_H_
 #define LCD_H_
 
-//#define F_CPU 16000000ul
+#define F_CPU 16000000ul
 #include <util/delay.h>
-#include "..\DIO\DIO.h"
+#include "..\..\MCAL\DIO\DIO.h"
 
 #define LCD_Data	('A')
 #define LCD_Ctrl	('B')

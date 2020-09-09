@@ -9,8 +9,8 @@
 #ifndef DIO_H_
 #define DIO_H_
 
-#include "..\utils\STD_types.h"
-#include "..\utils\BitMath.h"
+#include "..\..\utils\STD_types.h"
+#include "..\..\utils\BitMath.h"
 #include "DIO_HW.h"
 
 /***enum for the pins numbers***/

@@ -9,9 +9,9 @@
 #ifndef KP_H_
 #define KP_H_
 
-//#define F_CPU 16000000ul
+#define F_CPU 16000000ul
 #include <util/delay.h>
-#include "..\DIO\DIO.h"
+#include "..\..\MCAL\DIO\DIO.h"
 
 /***key pad port***/
 #define KP_PORT		'D'
