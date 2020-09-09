@@ -1,0 +1,1 @@
+%SystemRoot%\System32;C:\Windows\System32;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;%SYSTEMROOT%\System32\OpenSSH\;C:\MinGW\bin;C:\Program Files\Git\cmd;
