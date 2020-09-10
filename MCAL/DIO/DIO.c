@@ -459,41 +459,28 @@ void DIO_SetHighNibDir(uint8 port,STD_Direction dir)
 }
 
 /***write output to the first 4 pins of the port***/
-void DIO_WriteLowNibVal(uint8 port,uint8 val)//need to be revised
+void DIO_WriteLowNibVal(uint8 port,uint8 val)
 {
 	switch(port)
 	{
 		case 'A':
 		case 'a':
 			PORT_A = CLR_LOW_NIB(PORT_A) | CLR_HIGH_NIB(val);
-			/*DIO_WritePin(PORT_A,PIN0,GET_BIT(val,BIT0));
-			DIO_WritePin(PORT_A,PIN1,GET_BIT(val,BIT1));
-			DIO_WritePin(PORT_A,PIN2,GET_BIT(val,BIT2));
-			DIO_WritePin(PORT_A,PIN3,GET_BIT(val,BIT3));*/
 			break;
 			
 		case 'B':
 		case 'b':
-			DIO_WritePin(PORT_B,PIN0,GET_BIT(val,BIT0));
-			DIO_WritePin(PORT_B,PIN1,GET_BIT(val,BIT1));
-			DIO_WritePin(PORT_B,PIN2,GET_BIT(val,BIT2));
-			DIO_WritePin(PORT_B,PIN3,GET_BIT(val,BIT3));
+			PORT_B = CLR_LOW_NIB(PORT_B) | CLR_HIGH_NIB(val);
 			break;
 		
 		case 'C':
 		case 'c':
-			DIO_WritePin(PORT_C,PIN0,GET_BIT(val,BIT0));
-			DIO_WritePin(PORT_C,PIN1,GET_BIT(val,BIT1));
-			DIO_WritePin(PORT_C,PIN2,GET_BIT(val,BIT2));
-			DIO_WritePin(PORT_C,PIN3,GET_BIT(val,BIT3));
+			PORT_C = CLR_LOW_NIB(PORT_C) | CLR_HIGH_NIB(val);
 			break;
 		
 		case 'D':
 		case 'd':
-			DIO_WritePin(PORT_D,PIN0,GET_BIT(val,BIT0));
-			DIO_WritePin(PORT_D,PIN1,GET_BIT(val,BIT1));
-			DIO_WritePin(PORT_D,PIN2,GET_BIT(val,BIT2));
-			DIO_WritePin(PORT_D,PIN3,GET_BIT(val,BIT3));
+			PORT_D = CLR_LOW_NIB(PORT_D) | CLR_HIGH_NIB(val);
 			break;
 		
 		default:

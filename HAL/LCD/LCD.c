@@ -10,15 +10,12 @@
 void LCD_Enable()
 {
 	DIO_WritePin(LCD_Ctrl,LCD_En,HIGH);
-	_delay_us(10);
+	_delay_us(1);
 	DIO_WritePin(LCD_Ctrl,LCD_En,LOW);
 }
 
 void LCD_init()
 {
-	/***data port initialization***/
-	//DIO_SetPortDir(LCD_Data,HIGH);//8 bits data
-	
 	/***data port initialization***/
 	DIO_SetHighNibDir(LCD_Data,OUT);
 	
@@ -36,9 +33,6 @@ void LCD_init()
 	DIO_WriteHighNibVal(LCD_Data,0x30);
 	_delay_us(100);
 	DIO_WriteHighNibVal(LCD_Data,0x30);
-	
-	//LCD_SendCommand(LCD_FUNCTION_8BIT_2LINES);//8 bits data bus
-	LCD_SendCommand(LCD_FUNCTION_4BIT_1LINE);
 	
 	LCD_SendCommand(LCD_FUNCTION_4BIT_2LINES);
 	/*display on*/
@@ -111,20 +105,45 @@ void LCD_SendString(uint8 string[])
 	}
 }
 
-/*void LCD_SendNumber(uint16 number)
+void LCD_SendNumber(uint16 number)
 {
-	uint8 array[16];
-	uint8 i = 0;
+	uint8 ascii[10] = {'0','1','2','3','4','5','6','7','8','9'};//array for ascii code of each integer
+	uint8 stringofnumber[16],temp_string[16];
+	uint8 k,temp,i = 0;
+	//loop to get each individual number of the big number
 	while(number != 0)
 	{
-		array[i] = number % 10;
+		temp = number % 10;
+		temp_string[i] = ascii[temp];//get the number as ascii code
 		number /= 10;
-		i++; 
+		i++;
 	}
-	while(i != 0)
+	stringofnumber[i] = '\0';//put null in the last element of the array
+	//loop to reverse the order of numbers
+	for(k=0; k<i; k++)
 	{
-		LCD_SendChar("array[i]");
-		_delay_ms(1000);
-		i--;
+		stringofnumber[i-k-1]=temp_string[k];
 	}
-}*/
+	LCD_SendString(stringofnumber);
+}
+
+void LCD_SendRealNumber (float32  Number)
+{
+	if(Number < 0)
+	{
+		LCD_SendChar('-');
+		Number = 0 - Number;
+	}
+	else{}
+	uint16 integr = Number;
+	LCD_SendNumber(integr);
+	LCD_SendChar('.');
+	float32 fraction = Number-integr;
+	uint16 integrFrac = fraction * 10000;
+	while((integrFrac % 10) == 0)
+	{
+		integrFrac /= 10;
+	}
+	//uint16 integrFrac = fraction * 1000;
+	LCD_SendNumber(integrFrac);
+}
