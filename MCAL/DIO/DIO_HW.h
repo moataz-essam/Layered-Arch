@@ -1,7 +1,7 @@
 /*
  * DIO_HW.h
  *
- * Created: 9/3/2020 12:53:25 AM
+ * Created: 9/15/2020 10:26:46 PM
  *  Author: Moataz
  */ 
 
@@ -32,5 +32,18 @@
 #define PIN_B	*((const volatile uint8*)0x36)
 #define PIN_C	*((const volatile uint8*)0x33)
 #define PIN_D	*((const volatile uint8*)0x30)
+
+/***enum for the pins numbers***/
+typedef enum
+{
+	PIN0,
+	PIN1,
+	PIN2,
+	PIN3,
+	PIN4,
+	PIN5,
+	PIN6,
+	PIN7
+}DIO_PinNo;
 
 #endif /* DIO_HW_H_ */

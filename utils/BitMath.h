@@ -1,7 +1,7 @@
 /*
  * BitMath.h
  *
- * Created: 9/3/2020 12:53:12 AM
+ * Created: 9/15/2020 10:26:22 PM
  *  Author: Moataz
  */ 
 
@@ -30,10 +30,10 @@
 #define TOGGLE_HIGH_NIB(u8reg)	(u8reg ^= 0xF0)
 
 /***reading value of single bit***/
-#define GET_BIT(u8reg,Pin)	((u8reg>>Pin) & 0x01)
+#define GET_BIT(u8reg,Pin)	(u8reg & (0x01<<Pin))
 
 /***reading value of 4 bits(low nibble & high nibble)***/
 #define GET_LOW_NIB(u8reg)	(u8reg & 0X0F)
-#define GET_HIGH_NIB(u8reg)	((u8reg>>4) & 0X0F)
+#define GET_HIGH_NIB(u8reg)	(u8reg & (0X0F<<4))
 
 #endif /* BITMATH_H_ */

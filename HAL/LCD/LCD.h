@@ -1,7 +1,7 @@
 /*
  * LCD.h
  *
- * Created: 9/3/2020 12:54:06 AM
+ * Created: 9/15/2020 10:30:45 PM
  *  Author: Moataz
  */ 
 
@@ -9,25 +9,11 @@
 #ifndef LCD_H_
 #define LCD_H_
 
-#define F_CPU 16000000ul
 #include <util/delay.h>
+#include "..\..\config/LCD_cfg.h"
 #include "..\..\MCAL\DIO\DIO.h"
 
-#define LCD_Data	('A')
-#define LCD_Ctrl	('B')
-
-/***LCD data pins***/
-#define LCD_D4	4
-#define LCD_D5	5
-#define LCD_D6	6
-#define LCD_D7	7
-
-/***LCD control pins***/
-#define LCD_RS	1
-#define LCD_RW	2
-#define LCD_En	3
-
-/***LCD commands***/ 
+/***LCD commands***/
 #define LCD_FUNCTION_8BIT_1LINE   					(0x30)
 #define LCD_FUNCTION_8BIT_2LINES   					(0x38)
 #define LCD_FUNCTION_4BIT_1LINE   					(0x20)
@@ -57,10 +43,10 @@ void LCD_init();
 void LCD_ClrScreen();
 void LCD_SendCommand(uint8 cmd);
 void LCD_SendChar(uint8 data);
-void LCD_SendString(uint8 string[]);
+void LCD_SendString(uint8 *string);
 void LCD_SendNumber(uint16 number);
 void LCD_SendRealNumber (float32  Number);
-//void LCD_GotoXY(uint8 x,uint8 y);
+void LCD_GotoXY(uint8 x,uint8 y);
 //void LCD_CreatChar(uint8 charnum,uint8 a_NewShape[]);
 
 #endif /* LCD_H_ */

@@ -1,7 +1,7 @@
 /*
  * KP.c
  *
- * Created: 9/5/2020 2:33:50 AM
+ * Created: 9/15/2020 10:30:32 PM
  *  Author: Moataz
  */ 
 
@@ -34,12 +34,9 @@ uint8 KP_Get_Key()
 		{
 			if(DIO_ReadPin(KP_PORT,(col+ROWS)) == LOW)
 			{
-				_delay_ms(30);
-				if (DIO_ReadPin(KP_PORT,(col+ROWS)) == LOW)
-				{
-					key=keys[row][col];
-					break;
-				}
+				_delay_ms(20);
+				key=keys[row][col];
+				break;
 			}
 		}
 	}

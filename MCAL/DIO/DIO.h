@@ -1,7 +1,7 @@
 /*
  * DIO.h
  *
- * Created: 9/3/2020 12:53:36 AM
+ * Created: 9/15/2020 10:27:04 PM
  *  Author: Moataz
  */ 
 
@@ -13,36 +13,11 @@
 #include "..\..\utils\BitMath.h"
 #include "DIO_HW.h"
 
-/***enum for the pins numbers***/
-typedef enum
-{
-	PIN0,
-	PIN1,
-	PIN2,
-	PIN3,
-	PIN4,
-	PIN5,
-	PIN6,
-	PIN7
-}DIO_PinNo;
-
-/***enum for the bits numbers***/
-typedef enum
-{
-	BIT0,
-	BIT1,
-	BIT2,
-	BIT3,
-	BIT4,
-	BIT5,
-	BIT6,
-	BIT7
-}DIO_BitNo;
-
 /***configure single pin***/
 void DIO_SetPinDir(uint8 port,uint8 PinNo,STD_Direction dir);
 void DIO_WritePin(uint8 port,uint8 PinNo,STD_SignalLevel level);
 STD_SignalLevel DIO_ReadPin(uint8 port,uint8 PinNo);
+void DIO_FlipPin(uint8 port,uint8 PinNo);
 
 /***configure the port***/
 void DIO_SetPortDir(uint8 port,STD_Direction dir);

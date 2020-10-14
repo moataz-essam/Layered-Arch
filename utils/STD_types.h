@@ -1,7 +1,7 @@
 /*
  * STD_types.h
  *
- * Created: 9/3/2020 12:52:52 AM
+ * Created: 9/15/2020 10:26:06 PM
  *  Author: Moataz
  */ 
 
@@ -42,5 +42,21 @@ typedef enum
 	FALSE=0,
 	TRUE=1
 }STD_Boolean;
+
+/***enum for the bits numbers***/
+typedef enum
+{
+	BIT0,
+	BIT1,
+	BIT2,
+	BIT3,
+	BIT4,
+	BIT5,
+	BIT6,
+	BIT7
+}STD_types_BitNo;
+
+#define DISABLE		0
+#define ENABLE		1
 
 #endif /* STD_TYPES_H_ */

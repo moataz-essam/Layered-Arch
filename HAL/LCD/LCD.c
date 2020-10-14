@@ -1,7 +1,7 @@
 /*
  * LCD.c
  *
- * Created: 9/3/2020 12:54:18 AM
+ * Created: 9/15/2020 10:30:56 PM
  *  Author: Moataz
  */ 
 
@@ -10,7 +10,7 @@
 void LCD_Enable()
 {
 	DIO_WritePin(LCD_Ctrl,LCD_En,HIGH);
-	_delay_us(1);
+	_delay_us(10);
 	DIO_WritePin(LCD_Ctrl,LCD_En,LOW);
 }
 
@@ -26,14 +26,10 @@ void LCD_init()
 	
 	/***LCD initialization***/
 	_delay_ms(15);
-	DIO_WritePin(LCD_Ctrl,LCD_RS,LOW);
-	DIO_WritePin(LCD_Ctrl,LCD_RW,LOW);
-	DIO_WriteHighNibVal(LCD_Data,0x30);
-	_delay_ms(4.1);
-	DIO_WriteHighNibVal(LCD_Data,0x30);
-	_delay_us(100);
-	DIO_WriteHighNibVal(LCD_Data,0x30);
 	
+	LCD_SendCommand(0x33);
+	LCD_SendCommand(0x32);
+
 	LCD_SendCommand(LCD_FUNCTION_4BIT_2LINES);
 	/*display on*/
 	LCD_SendCommand(LCD_DISP_ON);
@@ -54,11 +50,6 @@ void LCD_SendCommand(uint8 cmd)
 	DIO_WritePin(LCD_Ctrl,LCD_RS,LOW);
 	DIO_WritePin(LCD_Ctrl,LCD_RW,LOW);
 	
-	//8 bits data
-	//put command on data port
-	//DIO_WritePortVal(LCD_Data,cmd);
-	//LCD_Enable();
-	
 	//2-put second half of command on LCD pins 4-->7
 	DIO_WriteHighNibVal(LCD_Data,cmd);
 	
@@ -71,7 +62,7 @@ void LCD_SendCommand(uint8 cmd)
 	//5-enable falling edge
 	LCD_Enable();
 	
-	_delay_ms(10);
+	_delay_ms(5);
 }
 
 void LCD_SendChar(uint8 data)
@@ -92,10 +83,10 @@ void LCD_SendChar(uint8 data)
 	//5-enable falling edge
 	LCD_Enable();
 	
-	_delay_ms(10);
+	_delay_ms(5);
 }
 
-void LCD_SendString(uint8 string[])
+void LCD_SendString(uint8 *string)
 {
 	uint8 i = 0;
 	while(string[i] != '\0')
@@ -111,12 +102,20 @@ void LCD_SendNumber(uint16 number)
 	uint8 stringofnumber[16],temp_string[16];
 	uint8 k,temp,i = 0;
 	//loop to get each individual number of the big number
-	while(number != 0)
+	if (number == 0)
 	{
-		temp = number % 10;
-		temp_string[i] = ascii[temp];//get the number as ascii code
-		number /= 10;
+		temp_string[i] = ascii[0];
 		i++;
+	}
+	else
+	{
+		while(number != 0)
+		{
+			temp = number % 10;
+			temp_string[i] = ascii[temp];//get the number as ascii code
+			number /= 10;
+			i++;
+		}
 	}
 	stringofnumber[i] = '\0';//put null in the last element of the array
 	//loop to reverse the order of numbers
@@ -146,4 +145,16 @@ void LCD_SendRealNumber (float32  Number)
 	}
 	//uint16 integrFrac = fraction * 1000;
 	LCD_SendNumber(integrFrac);
+}
+
+void LCD_GotoXY(uint8 x,uint8 y)
+{
+	if (x==0)
+	{
+		LCD_SendCommand((LCD_BEGIN_AT_FIRST_ROW)+y);
+	}
+	else
+	{
+		LCD_SendCommand((LCD_BEGIN_AT_SECOND_ROW)+y);
+	}
 }
